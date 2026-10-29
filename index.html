@@ -1,0 +1,53 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>OHS Store</title>
+  <meta name="description" content="Custom Cyclones apparel from the Ottawa High School Store.">
+  <meta name="theme-color" content="#c8102e">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Oswald:wght@500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="css/styles.css">
+</head>
+<body>
+  <a class="skip" href="#app">Skip to content</a>
+  <div id="announce" class="announce" role="status" hidden></div>
+  <header class="site-header">
+    <div class="wrap header-inner">
+      <a class="brand" href="#/" aria-label="OHS Store home">
+        <img src="images/designs/cyclone-3.png" alt="" width="40" height="40">
+        <span><strong>OHS Store</strong><small>Ottawa Cyclones</small></span>
+      </a>
+      <button class="menu-btn" aria-label="Menu" aria-expanded="false" aria-controls="nav"><span></span></button>
+      <nav class="nav" id="nav">
+        <a href="#/shop" data-route="shop">Shop</a>
+        <a href="#/shop" id="nav-holiday" class="nav-holiday" hidden></a>
+        <a href="#/designs" data-route="designs">Designs</a>
+        <a href="#/track" data-route="track">Track order</a>
+        <a href="#/help" data-route="help">Help</a>
+      </nav>
+      <a class="cart-link" href="#/cart" data-route="cart" aria-label="Cart">
+        <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M6 6h15l-2 9H8L6 3H3" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/><circle cx="9" cy="20" r="1.6" fill="currentColor"/><circle cx="18" cy="20" r="1.6" fill="currentColor"/></svg>
+        <span class="cart-count" hidden>0</span>
+      </a>
+    </div>
+  </header>
+
+  <main id="app" tabindex="-1"></main>
+
+  <footer class="site-footer">
+    <div class="wrap footer-inner">
+      <div><strong>OHS Store</strong><br><span>Ottawa High School · USD 290 · Go Cyclones!</span></div>
+      <div class="footer-links"><a href="#/shop">Shop</a><a href="#/designs">Designs</a><a href="#/track">Track order</a><span id="footer-contact"></span></div>
+    </div>
+  </footer>
+
+  <dialog id="design-dialog" aria-label="Design details"></dialog>
+  <div id="toast" role="status" aria-live="polite"></div>
+
+  <script src="js/art.js"></script>
+  <script src="js/app.js"></script>
+</body>
+</html>

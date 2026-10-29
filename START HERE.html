@@ -1,0 +1,241 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>OHS Store – Start Here</title>
+<style>
+  :root { --red: #c8102e; --red-soft: #fdecee; --black: #141414; --ink: #1d1d1f; --muted: #5f5f66; --line: #e4e4e7; --soft: #f6f6f7; --green: #17613a; --green-soft: #e3f6e8; --amber-soft: #fff6dd; }
+  * { box-sizing: border-box; }
+  body { margin: 0; font: 18px/1.6 "Segoe UI", system-ui, -apple-system, Roboto, Arial, sans-serif; color: var(--ink); background: #fff; }
+  header { background: var(--black); color: #fff; border-bottom: 6px solid var(--red); }
+  .wrap { width: min(900px, 100% - 32px); margin: 0 auto; }
+  header .wrap { padding: 36px 0 30px; display: flex; gap: 20px; align-items: center; }
+  header img { width: 78px; height: 78px; }
+  header h1 { margin: 0; font-size: 2.3rem; line-height: 1.1; letter-spacing: .01em; }
+  header p { margin: 6px 0 0; color: #cfcfd4; font-size: 1.05rem; }
+  h2 { font-size: 1.7rem; margin: 0 0 6px; line-height: 1.2; }
+  h3 { font-size: 1.2rem; margin: 26px 0 8px; }
+  section { padding: 34px 0 10px; border-bottom: 1px solid var(--line); }
+  .who { display: inline-block; font-size: .8rem; font-weight: 700; letter-spacing: .08em; text-transform: uppercase; padding: 4px 12px; border-radius: 999px; background: var(--red-soft); color: var(--red); margin-bottom: 10px; }
+  .who.it { background: #e8eefc; color: #26408b; }
+  .lead { color: var(--muted); margin: 0 0 18px; }
+  .intro { background: var(--soft); border-radius: 16px; padding: 22px 26px; margin: 28px 0 8px; font-size: 1.1rem; }
+  .intro strong { color: var(--red); }
+  .toc { display: grid; grid-template-columns: repeat(auto-fill, minmax(200px, 1fr)); gap: 12px; margin: 20px 0 6px; }
+  .toc a { display: block; text-decoration: none; color: inherit; border: 2px solid var(--line); border-radius: 14px; padding: 14px 16px; }
+  .toc a:hover { border-color: var(--red); }
+  .toc b { display: block; color: var(--red); font-size: .85rem; letter-spacing: .06em; text-transform: uppercase; }
+  ol.steps { list-style: none; counter-reset: s; padding: 0; margin: 18px 0; }
+  ol.steps > li { counter-increment: s; position: relative; padding: 4px 0 22px 64px; }
+  ol.steps > li::before { content: counter(s); position: absolute; left: 0; top: 0; width: 44px; height: 44px; border-radius: 50%; background: var(--red); color: #fff;
+    font-weight: 800; font-size: 1.3rem; display: grid; place-items: center; }
+  ol.steps > li > strong:first-child { display: block; font-size: 1.2rem; margin-bottom: 2px; }
+  .key { display: inline-block; font-weight: 700; background: var(--black); color: #fff; border-radius: 8px; padding: 1px 10px; font-size: .95em; white-space: nowrap; }
+  .file { font-weight: 700; background: var(--soft); border: 1px solid var(--line); border-radius: 8px; padding: 1px 8px; white-space: nowrap; }
+  code, .url { font-family: Consolas, Menlo, monospace; font-size: .92em; background: var(--soft); border: 1px solid var(--line); border-radius: 6px; padding: 1px 7px; }
+  .box { border-radius: 14px; padding: 16px 20px; margin: 16px 0; }
+  .box.warn { background: var(--amber-soft); border-left: 6px solid #e0a100; }
+  .box.good { background: var(--green-soft); border-left: 6px solid #1f9d55; }
+  .box.red { background: var(--red-soft); border-left: 6px solid var(--red); }
+  .box p { margin: 6px 0; }
+  .box strong:first-child { display: block; }
+  table { width: 100%; border-collapse: collapse; margin: 14px 0 20px; font-size: 1rem; }
+  th { text-align: left; background: var(--black); color: #fff; padding: 10px 14px; }
+  td { padding: 11px 14px; border-bottom: 1px solid var(--line); vertical-align: top; }
+  tr:nth-child(even) td { background: #fafafa; }
+  td:first-child { font-weight: 700; width: 36%; }
+  figure { margin: 18px 0 24px; }
+  figure img { width: 100%; border-radius: 12px; border: 1px solid var(--line); box-shadow: 0 6px 24px rgba(0,0,0,.08); }
+  figcaption { color: var(--muted); font-size: .9rem; margin-top: 6px; text-align: center; }
+  .flow { display: flex; flex-wrap: wrap; gap: 8px; align-items: center; margin: 14px 0; }
+  .flow span { background: var(--soft); border: 2px solid var(--line); border-radius: 999px; padding: 6px 14px; font-weight: 700; }
+  .flow i { font-style: normal; color: var(--red); font-weight: 800; }
+  ul.check { list-style: none; padding: 0; }
+  ul.check li { padding-left: 34px; position: relative; margin: 10px 0; }
+  ul.check li::before { content: "☐"; position: absolute; left: 0; font-size: 1.3rem; line-height: 1.2; color: var(--red); }
+  footer { color: var(--muted); font-size: .95rem; padding: 30px 0 60px; }
+  @media print { body { font-size: 13pt; } section { break-inside: avoid-page; } .toc { display: none; } header { background: #fff; color: #000; } header p { color: #333; } }
+  @media (max-width: 600px) { body { font-size: 17px; } header h1 { font-size: 1.8rem; } td:first-child { width: auto; } }
+</style>
+</head>
+<body>
+<header>
+  <div class="wrap">
+    <img src="images/designs/cyclone-3.png" alt="">
+    <div>
+      <h1>OHS Store — Start Here</h1>
+      <p>Everything you need to run the Ottawa High School Store website, in plain English.</p>
+    </div>
+  </div>
+</header>
+
+<main class="wrap">
+  <div class="intro">
+    This folder is the <strong>whole OHS Store website</strong>: the shop where students order Cyclones gear,
+    and a <strong>private dashboard</strong> where Mr. Setzer manages orders, prices, designs and the Christmas collection.
+    Nothing else needs to be bought.
+  </div>
+
+  <nav class="toc">
+    <a href="#try"><b>Part 1</b>Try it on your computer</a>
+    <a href="#dashboard"><b>Part 2</b>Using your dashboard</a>
+    <a href="#online"><b>Part 3</b>Putting it online</a>
+    <a href="#help"><b>Part 4</b>If something goes wrong</a>
+    <a href="#good"><b>Part 5</b>Good to know</a>
+  </nav>
+
+  <!-- ================= PART 1 ================= -->
+  <section id="try">
+    <span class="who">For anyone · about 5 minutes</span>
+    <h2>Part 1 — Try it on your computer</h2>
+    <p class="lead">Follow these steps one at a time. You only do steps 1, 2 and 4 once.</p>
+
+    <ol class="steps">
+      <li><strong>Install Node.js (free, one time only)</strong>
+        Go to <span class="url">nodejs.org</span> and click the big green button that says <span class="key">LTS</span>.
+        Open the file that downloads and keep clicking <span class="key">Next</span> until it says it's finished.
+        <br><em>Node.js is the free program that runs the store. You'll never need to open it yourself.</em></li>
+
+      <li><strong>Unzip this folder</strong>
+        On Windows: right-click the zip file and choose <span class="key">Extract All</span>, then <span class="key">Extract</span>.
+        On a Mac: just double-click the zip file.
+        Put the folder somewhere easy to find, like your Desktop.</li>
+
+      <li><strong>Start the store</strong>
+        Open the folder and double-click:
+        <p>🪟 Windows: <span class="file">Start OHS Store</span><br>
+           🍎 Mac: right-click <span class="file">Start OHS Store (Mac)</span>, choose <span class="key">Open</span>, then <span class="key">Open</span> again. (Mac only asks this the first time.)</p>
+        <div class="box warn"><strong>Windows shows a blue “Windows protected your PC” box?</strong>
+          <p>That's normal for files from the internet. Click <span class="key">More info</span>, then <span class="key">Run anyway</span>.</p></div></li>
+
+      <li><strong>Make your password (first time only)</strong>
+        A black window asks you to type a password for the dashboard. Use <strong>at least 10 characters</strong>,
+        press <span class="key">Enter</span>, and <strong>write it down somewhere safe</strong>.
+        (On a Mac nothing appears while you type. That's normal.)</li>
+
+      <li><strong>The store opens in your web browser</strong>
+        You'll see the shop. To get to your dashboard, go to <span class="url">http://localhost:3000/admin</span> and sign in with your password.</li>
+    </ol>
+
+    <div class="box red"><strong>Keep the black window open.</strong>
+      <p>The black window <em>is</em> the store. While it's open, the store works. Closing it stops the store. To start again, just repeat step 3.</p></div>
+
+    <div class="box warn"><strong>Students can't order yet</strong>
+      <p>“localhost” means <em>only this computer</em> can see the store. That's perfect for trying it out.
+      To let students order from their own phones, it has to be put online. See <a href="#online">Part 3</a>.</p></div>
+
+    <figure><img src="docs/screenshots/guide-store-home.png" alt="The OHS Store home page"><figcaption>The shop that students see.</figcaption></figure>
+    <figure><img src="docs/screenshots/guide-store-customize.png" alt="Customizing a hoodie"><figcaption>Students pick a garment, size, color, where to print, and a design, and see a live preview.</figcaption></figure>
+  </section>
+
+  <!-- ================= PART 2 ================= -->
+  <section id="dashboard">
+    <span class="who">For Mr. Setzer</span>
+    <h2>Part 2 — Using your dashboard</h2>
+    <p class="lead">Go to <span class="url">/admin</span> and sign in. Everything is done with buttons, with no code at all.</p>
+
+    <figure><img src="docs/screenshots/v2-desktop-01-command-center.png" alt="The owner dashboard"><figcaption>Your dashboard. The menu on the left takes you everywhere. (The numbers in this picture are from a practice run.)</figcaption></figure>
+
+    <h3>How an order moves along</h3>
+    <div class="flow"><span>New</span><i>→</i><span>In progress</span><i>→</i><span>Ready for pickup</span><i>→</i><span>Completed</span></div>
+    <p>Every time you change an order's status, the student can see it by clicking <strong>Track order</strong> on the store and typing their order number and email.</p>
+
+    <h3>“I want to…”</h3>
+    <table>
+      <tr><th>I want to…</th><th>Here's how</th></tr>
+      <tr><td>See new orders</td><td>Click <strong>Orders</strong>. New ones are marked <strong>NEW</strong>, and the menu shows how many are waiting.</td></tr>
+      <tr><td>Move an order along</td><td>Click the order, change <strong>Order status</strong>, click <strong>Save changes</strong>.</td></tr>
+      <tr><td>Mark an order as paid</td><td>Open the order, turn on the <strong>Paid</strong> switch, click <strong>Save changes</strong>.</td></tr>
+      <tr><td>Approve a special request</td><td>Click <strong>Requests</strong>. Type a price if it asks for one, then click <strong>Approve</strong> or <strong>Decline</strong>. You can add a message for the student.</td></tr>
+      <tr><td>Change a price</td><td><strong>Products &amp; pricing</strong>, change the number, then click <strong>Save changes</strong> on the black bar at the bottom.</td></tr>
+      <tr><td>Stop selling something (for now)</td><td><strong>Products &amp; pricing</strong>, turn off its <strong>For sale</strong> (or <strong>Shown</strong>) switch, then <strong>Save changes</strong>. Turn it back on any time.</td></tr>
+      <tr><td>Add a new design</td><td><strong>Products &amp; pricing → Designs → + Add design</strong>. Click <strong>Upload</strong>, pick the picture (a PNG works best), type a name, then <strong>Save changes</strong>.</td></tr>
+      <tr><td>Sell Christmas items</td><td><strong>Products &amp; pricing → Christmas collection</strong>. Turn on <strong>Show the collection</strong>, click <strong>+ Add holiday item</strong>, add a photo, name and price, then <strong>Save changes</strong>.</td></tr>
+      <tr><td>Close the store (e.g. over break)</td><td><strong>Settings</strong>, turn off <strong>Store is open</strong>, then <strong>Save changes</strong>. Students see your “closed” message.</td></tr>
+      <tr><td>Put a message at the top of the store</td><td><strong>Settings → Announcement banner</strong>. Type it and <strong>Save changes</strong>. Clear it to remove it.</td></tr>
+      <tr><td>Open orders in Excel</td><td><strong>Orders → Export CSV</strong>. The file opens in Excel or Google Sheets.</td></tr>
+      <tr><td>Keep a backup copy</td><td><strong>Settings → Download full backup</strong>. Keep the file somewhere safe.</td></tr>
+      <tr><td>Change my password</td><td><strong>Settings → Password</strong>. Or, if you forgot it, see <a href="#help">Part 4</a>.</td></tr>
+    </table>
+
+    <h3>What goes to “Requests”?</h3>
+    <p>Anything that needs your OK before printing: an <strong>“Other” design or color</strong>, <strong>custom text</strong> (like a name or number),
+      <strong>Bring Your Own Apparel</strong>, and <strong>Accessories / Others</strong> (those need you to type a price).</p>
+    <figure><img src="docs/screenshots/v2-desktop-07-requests.png" alt="The Requests page"><figcaption>The Requests page: approve or decline with one click.</figcaption></figure>
+  </section>
+
+  <!-- ================= PART 3 ================= -->
+  <section id="online">
+    <span class="who it">For your tech person / USD 290 IT</span>
+    <h2>Part 3 — Putting it online so students can order</h2>
+    <p class="lead">Hand this part to whoever helps with computers at school. It's a checklist. Technical details are in <span class="file">README.md</span>.</p>
+
+    <ul class="check">
+      <li><strong>Get the OK from the district.</strong> The store saves students' names, emails and phone numbers, so check the district's privacy rules first.</li>
+      <li><strong>Pick a place to run it.</strong> It needs a computer or hosting service that is <em>always on</em>, runs <strong>Node.js 22 or newer</strong>,
+        and <strong>keeps its files</strong> between restarts. Good choices: a school server, a small virtual server, or a host with a “persistent disk”
+        (for example Render, Railway or Fly.io).
+        <br>⚠️ “Static” hosting like GitHub Pages or Netlify will <strong>not</strong> work. It can't save orders.</li>
+      <li><strong>Start it</strong> with <code>node server.js</code> in this folder (or <code>npm start</code>). It uses port 3000 unless you set <code>PORT</code>.</li>
+      <li><strong>Set the owner password</strong> with <code>node scripts/set-password.js "a long password"</code>,
+        or start it the first time with <code>ADMIN_PASSWORD</code> set. Give the password only to Mr. Setzer.</li>
+      <li><strong>Turn on HTTPS</strong> (the padlock in the address bar). Most hosts do this for you. Then set <code>COOKIE_SECURE=1</code>,
+        and <code>TRUST_PROXY=1</code> if the host sits in front of the app.</li>
+      <li><strong>Back up the <span class="file">data</span> folder.</strong> All orders live there. The store also keeps its own daily copy for 30 days in <span class="file">data/backups</span>,
+        but keep another copy somewhere else too.</li>
+      <li><strong>Check it works:</strong> run <code>npm test</code>. It should end with “All checks passed”.</li>
+      <li><strong>Share the address</strong> (for example <span class="url">https://store.yourschool.org</span>) with students. The dashboard is that address plus <span class="url">/admin</span>.</li>
+    </ul>
+  </section>
+
+  <!-- ================= PART 4 ================= -->
+  <section id="help">
+    <span class="who">For anyone</span>
+    <h2>Part 4 — If something goes wrong</h2>
+    <table>
+      <tr><th>What you see</th><th>What to do</th></tr>
+      <tr><td>“Node.js is not installed”</td><td>Do <a href="#try">Part 1, step 1</a>, then double-click <span class="file">Start OHS Store</span> again.</td></tr>
+      <tr><td>The browser didn't open by itself</td><td>Open any web browser and type <span class="url">http://localhost:3000</span>.</td></tr>
+      <tr><td>“This site can't be reached”</td><td>The black window was closed, so the store stopped. Double-click <span class="file">Start OHS Store</span> again.</td></tr>
+      <tr><td>“something is already using port 3000”</td><td>The store is already running in another black window. Use that one, or close it and start again.</td></tr>
+      <tr><td>I forgot my password</td><td>Close the black window. Double-click <span class="file">Change Password</span> (Mac: <span class="file">Change Password (Mac)</span>), type a new one, then start the store again.</td></tr>
+      <tr><td>“Too many attempts”</td><td>After 5 wrong passwords, sign-in locks for 15 minutes to keep the store safe. Wait, then try again.</td></tr>
+      <tr><td>Windows: “Windows protected your PC”</td><td>Click <span class="key">More info</span>, then <span class="key">Run anyway</span>.</td></tr>
+      <tr><td>Mac: “can't be opened because it is from an unidentified developer”</td><td>Right-click the file, choose <span class="key">Open</span>, then <span class="key">Open</span> again.</td></tr>
+      <tr><td>Orders are missing</td><td>Don't panic. Look in the <span class="file">data/backups</span> folder for daily copies, and ask your tech person to restore one (see README.md).</td></tr>
+    </table>
+  </section>
+
+  <!-- ================= PART 5 ================= -->
+  <section id="good">
+    <span class="who">Good to know</span>
+    <h2>Part 5 — Good to know</h2>
+    <div class="box red"><strong>Never delete the <span class="file">data</span> folder.</strong>
+      <p>It holds every order, price and setting. To keep a copy, copy the whole folder somewhere safe (or use <strong>Settings → Download full backup</strong>).</p></div>
+    <h3>What the store does <em>not</em> do (yet)</h3>
+    <ul>
+      <li><strong>No online payments.</strong> Students pay in person, like before. Mark orders <strong>Paid</strong> in the dashboard.</li>
+      <li><strong>No automatic emails.</strong> Students check their order with <strong>Track order</strong>. You can email a student straight from their order page.</li>
+    </ul>
+    <p>Either one can be added later, but it needs an account with a payment or email company.</p>
+    <h3>About the pictures</h3>
+    <ul>
+      <li><strong>Designs:</strong> all 41 designs are real artwork. The two <strong>Sam Shield</strong> designs were rebuilt from screenshots and are a little less detailed. If you have the original files, upload them in <strong>Products &amp; pricing → Designs</strong> (click <strong>Replace</strong>).</li>
+      <li><strong>Shirts and hoodies:</strong> these are drawings, not photos. Christmas items can have real photos that you upload.</li>
+    </ul>
+    <h3>What's in this folder</h3>
+    <table>
+      <tr><td>Start OHS Store / Start OHS Store (Mac)</td><td>Double-click to run the store.</td></tr>
+      <tr><td>Change Password / Change Password (Mac)</td><td>Double-click to set a new dashboard password.</td></tr>
+      <tr><td>START HERE.html</td><td>This guide.</td></tr>
+      <tr><td>README.md</td><td>Technical details for your tech person.</td></tr>
+      <tr><td>data</td><td>Appears after the first start. Your orders and settings. <strong>Don't delete.</strong></td></tr>
+      <tr><td>Everything else</td><td>The website itself. No need to touch it.</td></tr>
+    </table>
+  </section>
+
+  <footer>OHS Store — simplified version · Go Cyclones! 🌪️</footer>
+</main>
+</body>
+</html>
